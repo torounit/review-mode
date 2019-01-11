@@ -14,7 +14,7 @@ namespace Review_Mode;
  */
 class Options {
 
-	const ACTION_NAME = 'toggle_review_mode';
+	const ACTION_NAME = 'change_review_mode';
 	const META_KEY = 'review_mode_active';
 
 	/**
@@ -35,13 +35,32 @@ class Options {
 		add_action( 'show_user_profile', [ $this, 'form_field' ], 9 );
 		add_action( 'personal_options_update', [ $this, 'update' ] );
 		add_action( 'edit_user_profile_update', [ $this, 'update' ] );
-		add_action( 'wp_ajax_' . self::ACTION_NAME, [ $this, 'wp_ajax_toggle_review_mode' ] );
+		add_action( 'wp_ajax_' . self::ACTION_NAME, [ $this, 'wp_ajax_change_review_mode' ] );
+	}
+
+	/**
+	 * Get toggle mode url.
+	 *
+	 * @return string
+	 */
+	public static function get_toggle_mode_url() {
+		$action_name = self::ACTION_NAME;
+		$meta_key = self::META_KEY;
+		$request_uri = filter_input( INPUT_SERVER, 'REQUEST_URI', FILTER_SANITIZE_URL );
+		return admin_url(
+			sprintf(
+				"/admin-ajax.php?action=${action_name}&${meta_key}=%s&redirect_to=%s&nonce=%s",
+				! absint( self::is_current_user_active() ),
+				urlencode( esc_url_raw( $request_uri ) ),
+				wp_create_nonce( self::ACTION_NAME )
+			)
+		);
 	}
 
 	/**
 	 * Toggle Review mode activate and deactivate.
 	 */
-	public function wp_ajax_toggle_review_mode() {
+	public function wp_ajax_change_review_mode() {
 		$nonce = filter_input( INPUT_GET, 'nonce' );
 		if ( ! wp_verify_nonce( $nonce, self::ACTION_NAME ) ) {
 			wp_die();
@@ -53,7 +72,7 @@ class Options {
 		} else {
 			wp_die( 'Permission denied.' );
 		}
-		wp_redirect( esc_url( filter_input( INPUT_GET, 'redirect_to' ) ) );
+		wp_safe_redirect( esc_url_raw( urldecode( filter_input( INPUT_GET, 'redirect_to' ) ) ) );
 		exit;
 	}
 
