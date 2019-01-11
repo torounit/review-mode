@@ -73,8 +73,7 @@ class Query {
 			return false;
 		}
 
-		return
-			! count( array_diff( $a, $b ) ) &&
+		return ! count( array_diff( $a, $b ) ) &&
 			! count( array_diff( $b, $a ) );
 	}
 

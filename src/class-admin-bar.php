@@ -74,9 +74,13 @@ class Admin_Bar {
 
 			#wpadminbar #wp-admin-bar-review-mode .ab-icon:before {
 				content: "\f339";
-			<?php if ( Options::is_current_user_active() ) : ?>
+			<?php
+			if ( Options::is_current_user_active() ) :
+				?>
 				color: yellow;
-			<?php endif; ?>
+				<?php
+			endif;
+			?>
 				top: 2px;
 			}
 
