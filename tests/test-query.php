@@ -12,12 +12,66 @@ namespace Review_Mode;
  */
 class Test_Query extends \WP_UnitTestCase {
 
+	/**
+	 * Author
+	 *
+	 * @var \WP_User
+	 */
 	private $author;
+
+	/**
+	 * Editor
+	 *
+	 * @var \WP_User
+	 */
 	private $editor;
+
+	/**
+	 * Subscriber
+	 *
+	 * @var \WP_User
+	 */
 	private $subscriber;
+
+	/**
+	 * Administrator
+	 *
+	 * @var \WP_User
+	 */
 	private $administrator;
 
-	function setUp() {
+	/**
+	 * Public post count.
+	 *
+	 * @var int
+	 */
+	private $public  = 1;
+
+	/**
+	 * Pending post count.
+	 *
+	 * @var int
+	 */
+	private $pending = 2;
+
+	/**
+	 * Draft post count.
+	 *
+	 * @var int
+	 */
+	private $draft   = 4;
+
+	/**
+	 * Private post count.
+	 *
+	 * @var int
+	 */
+	private $private = 8;
+
+	/**
+	 * Setup
+	 */
+	public function setUp() {
 		parent::setUp();
 		$this->subscriber    = self::factory()->user->create_and_get(
 			array(
@@ -43,6 +97,11 @@ class Test_Query extends \WP_UnitTestCase {
 		register_post_type( 'foo', [ 'public' => true ] );
 	}
 
+	/**
+	 * Data provider for post types.
+	 *
+	 * @return array
+	 */
 	public function post_type_provider() {
 		return [
 			[ 'post' ],
@@ -51,17 +110,12 @@ class Test_Query extends \WP_UnitTestCase {
 		];
 	}
 
-	private $public  = 1;
-	private $pending = 2;
-	private $draft   = 4;
-	private $private = 8;
-
 	/**
 	 * Create Posts for test.
 	 *
 	 * @param string $post_type post type name.
 	 */
-	function create_posts( $post_type ) {
+	private function create_posts( $post_type ) {
 		self::factory()->post->create_many(
 			$this->public,
 			array(
@@ -97,9 +151,12 @@ class Test_Query extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * Subscriber user inactive review mode.
+	 *
+	 * @test
 	 * @dataProvider post_type_provider
 	 *
-	 * @param $post_type
+	 * @param string $post_type post type name.
 	 */
 	public function test_get_posts_with_subscriber( $post_type ) {
 		$this->create_posts( $post_type );
@@ -151,9 +208,12 @@ class Test_Query extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * Subscriber user active review mode.
+	 *
+	 * @test
 	 * @dataProvider post_type_provider
 	 *
-	 * @param $post_type
+	 * @param string $post_type post type name.
 	 */
 	public function test_get_posts_with_subscriber_with_review_mode( $post_type ) {
 		$this->create_posts( $post_type );
@@ -206,9 +266,12 @@ class Test_Query extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * Editor user inactive review mode.
+	 *
+	 * @test
 	 * @dataProvider post_type_provider
 	 *
-	 * @param $post_type
+	 * @param string $post_type post type name.
 	 */
 	public function test_get_posts_with_editor( $post_type ) {
 		$this->create_posts( $post_type );
@@ -261,9 +324,12 @@ class Test_Query extends \WP_UnitTestCase {
 	}
 
 	/**
+	 * Editor user active review mode.
+	 *
+	 * @test
 	 * @dataProvider post_type_provider
 	 *
-	 * @param $post_type
+	 * @param string $post_type post type name.
 	 */
 	public function test_get_posts_with_editor_with_review_mode( $post_type ) {
 		$this->create_posts( $post_type );

@@ -54,7 +54,7 @@ class Query {
 			$post_status = explode( ',', $post_status );
 		}
 
-		if ( $post_status === [ 'publish' ] || $this->array_same_values( $post_status, $default_status ) ) {
+		if ( [ 'publish' ] === $post_status || $this->array_same_values( $post_status, $default_status ) ) {
 			$post_status = array_merge( $post_status, $this->get_append_statuses() );
 			$query->set( 'post_status', $post_status );
 		}
@@ -63,8 +63,8 @@ class Query {
 	/**
 	 * Check arrays have same values.
 	 *
-	 * @param array $a
-	 * @param array $b
+	 * @param array $a array.
+	 * @param array $b array.
 	 *
 	 * @return bool
 	 */
@@ -80,7 +80,7 @@ class Query {
 	/**
 	 * Check capability
 	 *
-	 * @param array|string $post_type
+	 * @param array|string $post_type post type for check.
 	 *
 	 * @return boolean
 	 */
