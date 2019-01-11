@@ -16,9 +16,12 @@ require_once dirname( __FILE__ ) . '/src/Options.php';
 
 const CAPABILITY = 'edit_others_posts';
 
-add_action( 'plugins_loaded', function () {
-	load_plugin_textdomain( 'review-mode', false, basename( dirname( __FILE__ ) ) . '/languages' );
-	new Query();
-	new Admin_Bar();
-	new Options();
-} );
+add_action(
+	'plugins_loaded',
+	function () {
+		load_plugin_textdomain( 'review-mode', false, basename( dirname( __FILE__ ) ) . '/languages' );
+		new Query();
+		new Admin_Bar();
+		new Options();
+	}
+);

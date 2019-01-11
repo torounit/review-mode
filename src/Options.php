@@ -4,6 +4,7 @@ namespace Review_Mode;
 
 /**
  * Class Options
+ *
  * @package Review_Mode
  */
 class Options {
@@ -53,11 +54,11 @@ class Options {
 		?>
 
 		<div id="review_mode">
-			<h3><?php esc_html_e( 'Review mode', 'review-mode' );?></h3>
+			<h3><?php esc_html_e( 'Review mode', 'review-mode' ); ?></h3>
 			<table class="form-table">
 				<tr>
 					<th>
-						<label for="<?php echo esc_attr( self::META_KEY ); ?>"><?php esc_html_e( 'Activate review mode', 'review-mode' );?></label>
+						<label for="<?php echo esc_attr( self::META_KEY ); ?>"><?php esc_html_e( 'Activate review mode', 'review-mode' ); ?></label>
 					</th>
 					<td>
 						<label for="<?php echo esc_attr( self::META_KEY ); ?>">
@@ -67,9 +68,9 @@ class Options {
 								name="<?php echo esc_attr( self::META_KEY ); ?>"
 								value="1"
 								<?php checked( $review_mode_active, 1 ); ?>
-							><?php esc_html_e( 'Activate review mode', 'review-mode' );?></label>
+							><?php esc_html_e( 'Activate review mode', 'review-mode' ); ?></label>
 
-						<p class="description"><?php esc_html_e( 'Show draft and pending posts.', 'review-mode' );?></p>
+						<p class="description"><?php esc_html_e( 'Show draft and pending posts.', 'review-mode' ); ?></p>
 					</td>
 				</tr>
 			</table>

@@ -4,6 +4,7 @@ namespace Review_Mode;
 
 /**
  * Class Query
+ *
  * @package Review_Mode
  */
 class Query {
