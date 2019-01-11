@@ -22,6 +22,15 @@ class Query {
 	}
 
 	/**
+	 * Get statuses to add.
+	 *
+	 * @return array
+	 */
+	private function get_append_statuses() {
+		return apply_filters( 'review_mode_statuses', [ 'pending', 'draft' ] );
+	}
+
+	/**
 	 * Add post status in all query.
 	 *
 	 * @param \WP_Query $query \WP_Query instance.
@@ -35,13 +44,69 @@ class Query {
 			return;
 		}
 
-		$default_status = ( is_user_logged_in() ) ? [ 'publish', 'private' ] : [ 'publish' ];
+		$post_type = $query->get( 'post_type' );
+
+		$capability     = $this->current_user_can_read_posts( $post_type );
+		$default_status = ( $capability ) ? [ 'publish', 'private' ] : [ 'publish' ];
 		$post_status    = $query->get( 'post_status', $default_status );
+
 		if ( ! is_array( $post_status ) ) {
 			$post_status = explode( ',', $post_status );
 		}
 
-		$post_status = array_merge( $post_status, [ 'pending', 'draft' ] );
-		$query->set( 'post_status', $post_status );
+		if ( $post_status === [ 'publish' ] || $this->array_same_values( $post_status, $default_status ) ) {
+			$post_status = array_merge( $post_status, $this->get_append_statuses() );
+			$query->set( 'post_status', $post_status );
+		}
+	}
+
+	/**
+	 * Check arrays have same values.
+	 *
+	 * @param array $a
+	 * @param array $b
+	 *
+	 * @return bool
+	 */
+	private function array_same_values( $a, $b ) {
+		if ( empty( $a ) || empty( $b ) ) {
+			return false;
+		}
+
+		return
+			! count( array_diff( $a, $b ) ) &&
+			! count( array_diff( $b, $a ) );
+	}
+
+	/**
+	 * Check capability
+	 *
+	 * @param array|string $post_type
+	 *
+	 * @return boolean
+	 */
+	public function current_user_can_read_posts( $post_type ) {
+		if ( is_array( $post_type ) && count( $post_type ) > 1 ) {
+			$post_type_cap = 'multiple_post_type';
+		} else {
+			if ( is_array( $post_type ) ) {
+				$post_type = reset( $post_type );
+			}
+			$post_type_object = get_post_type_object( $post_type );
+			if ( empty( $post_type_object ) ) {
+				$post_type_cap = $post_type;
+			}
+		}
+
+		if ( ! empty( $post_type_object ) ) {
+			$read_private_cap = $post_type_object->cap->read_private_posts;
+		} else {
+			if ( empty( $post_type_cap ) ) {
+				return false;
+			}
+			$read_private_cap = 'read_private_' . $post_type_cap . 's';
+		}
+
+		return current_user_can( $read_private_cap );
 	}
 }
