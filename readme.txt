@@ -3,7 +3,7 @@ Contributors: Toro_Unit
 Donate link: https://paypal.me/torounit
 Tags: review, admin
 Requires at least: 4.8
-Tested up to:      4.8
+Tested up to:      5.0
 Stable tag:        0.1.0
 Requires PHP:      5.5
 License: GPLv2 or later
