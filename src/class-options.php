@@ -14,6 +14,7 @@ namespace Review_Mode;
  */
 class Options {
 
+	const ACTION_NAME = 'toggle_review_mode';
 	const META_KEY = 'review_mode_active';
 
 	/**
@@ -34,6 +35,26 @@ class Options {
 		add_action( 'show_user_profile', [ $this, 'form_field' ], 9 );
 		add_action( 'personal_options_update', [ $this, 'update' ] );
 		add_action( 'edit_user_profile_update', [ $this, 'update' ] );
+		add_action( 'wp_ajax_' . self::ACTION_NAME, [ $this, 'wp_ajax_toggle_review_mode' ] );
+	}
+
+	/**
+	 * Toggle Review mode activate and deactivate.
+	 */
+	public function wp_ajax_toggle_review_mode() {
+		$nonce = filter_input( INPUT_GET, 'nonce' );
+		if ( ! wp_verify_nonce( $nonce, self::ACTION_NAME ) ) {
+			wp_die();
+		}
+		$user_id = get_current_user_id();
+		if ( current_user_can( CAPABILITY ) ) {
+			$mode = filter_input( INPUT_GET, self::META_KEY );
+			update_user_meta( $user_id, self::META_KEY, $mode );
+		} else {
+			wp_die( 'Permission denied.' );
+		}
+		wp_redirect( esc_url( filter_input( INPUT_GET, 'redirect_to' ) ) );
+		exit;
 	}
 
 	/**

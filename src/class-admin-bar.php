@@ -22,14 +22,32 @@ class Admin_Bar {
 	}
 
 	/**
+	 * Get toggle mode url.
+	 *
+	 * @return string
+	 */
+	private function get_toggle_url() {
+		$action_name = Options::ACTION_NAME;
+		$meta_key = Options::META_KEY;
+		return admin_url(
+			sprintf(
+				"/admin-ajax.php?action=${action_name}&${meta_key}=%s&redirect_to=%s&nonce=%s",
+				! absint( Options::is_current_user_active() ),
+				urlencode( $_SERVER['REQUEST_URI'] ),
+				wp_create_nonce( 'toggle_review_mode' )
+			)
+		);
+	}
+
+	/**
 	 * Add button to admin bar.
 	 *
 	 * @param \WP_Admin_Bar $wp_admin_bar \WP_Admin_Bar instance.
 	 */
 	public function register_button( \WP_Admin_Bar $wp_admin_bar ) {
-		$text = ( Options::is_current_user_active() ) ? esc_html__( 'Review mode active', 'review-mode' ) : esc_html__( 'Review mode inactive', 'review-mode' );
+		$text  = ( Options::is_current_user_active() ) ? esc_html__( 'Review mode active', 'review-mode' ) : esc_html__( 'Review mode inactive', 'review-mode' );
 		$title = '<span class="ab-icon"></span><span class="ab-label">' . $text . '</span>';
-		$link  = admin_url( 'profile.php#review_mode' );
+		$link  = $this->get_toggle_url();
 
 		if ( current_user_can( CAPABILITY ) ) {
 			$wp_admin_bar->add_menu(
