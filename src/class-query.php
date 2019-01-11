@@ -27,7 +27,7 @@ class Query {
 	 * @return array
 	 */
 	private function get_append_statuses() {
-		return apply_filters( 'review_mode_statuses', [ 'pending', 'draft' ] );
+		return apply_filters( 'review_mode_statuses', [ 'pending' ] );
 	}
 
 	/**
