@@ -14,6 +14,10 @@
 
 namespace Review_Mode;
 
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
 require_once dirname( __FILE__ ) . '/src/class-query.php';
 require_once dirname( __FILE__ ) . '/src/class-admin-bar.php';
 require_once dirname( __FILE__ ) . '/src/class-options.php';

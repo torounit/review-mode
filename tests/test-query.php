@@ -1,6 +1,6 @@
 <?php
 /**
- * Class SampleTest
+ * Class Query Test
  *
  * @package Review_Mode
  */
