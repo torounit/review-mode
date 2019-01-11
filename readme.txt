@@ -13,7 +13,13 @@ Add mode to show pending posts in all archives for reviewing.
 
 == Description ==
 
-Show pending posts in all archives for reviewing.
+Click activate button in adminbar, Active review mode. Post with Pending Review are also output to the front end. You can check posts in archives, front page, etc.
+
+Review mode does not affect viewers or other users.
+
+= Filters =
+
+* `review_mode_statuses`:`array` status array for Post status displayed in review mode.
 
 == Changelog ==
 
