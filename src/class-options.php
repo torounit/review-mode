@@ -1,4 +1,9 @@
 <?php
+/**
+ * Option and Admin view.
+ *
+ * @package Review_Mode
+ */
 
 namespace Review_Mode;
 
@@ -12,13 +17,14 @@ class Options {
 	const META_KEY = 'review_mode_active';
 
 	/**
+	 * Check activation for Review Mode.
+	 *
 	 * @return boolean
 	 */
 	public static function is_current_user_active() {
 		$id = get_current_user_id();
 		return ! ! get_user_meta( $id, self::META_KEY, true );
 	}
-
 
 	/**
 	 * Options constructor.
@@ -47,7 +53,9 @@ class Options {
 	}
 
 	/**
-	 * @param \WP_User $user
+	 * Form view.
+	 *
+	 * @param \WP_User $user current user object.
 	 */
 	public function form_field( \WP_User $user ) {
 		$review_mode_active = get_user_meta( $user->ID, self::META_KEY, true );

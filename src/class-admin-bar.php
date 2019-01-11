@@ -1,10 +1,14 @@
 <?php
+/**
+ * Admin Bar class.
+ *
+ * @package Review_Mode
+ */
+
 namespace Review_Mode;
 
 /**
  * Class Admin_Bar
- *
- * @package Review_Mode
  */
 class Admin_Bar {
 
@@ -18,7 +22,9 @@ class Admin_Bar {
 	}
 
 	/**
-	 * @param \WP_Admin_Bar $wp_admin_bar
+	 * Add button to admin bar.
+	 *
+	 * @param \WP_Admin_Bar $wp_admin_bar \WP_Admin_Bar instance.
 	 */
 	public function register_button( \WP_Admin_Bar $wp_admin_bar ) {
 		$text = ( Options::is_current_user_active() ) ? esc_html__( 'Review mode active', 'review-mode' ) : esc_html__( 'Review mode inactive', 'review-mode' );

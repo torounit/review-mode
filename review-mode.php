@@ -10,9 +10,9 @@
 
 namespace Review_Mode;
 
-require_once dirname( __FILE__ ) . '/src/Query.php';
-require_once dirname( __FILE__ ) . '/src/Admin_Bar.php';
-require_once dirname( __FILE__ ) . '/src/Options.php';
+require_once dirname( __FILE__ ) . '/src/class-query.php';
+require_once dirname( __FILE__ ) . '/src/class-admin-bar.php';
+require_once dirname( __FILE__ ) . '/src/class-options.php';
 
 const CAPABILITY = 'edit_others_posts';
 

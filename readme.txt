@@ -1,6 +1,6 @@
 === Review Mode ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: https://example.com/
+Contributors: Toro_Unit
+Donate link: https://paypal.me/torounit
 Tags: review, admin
 Requires at least: 4.7
 Tested up to: 4.9
@@ -13,8 +13,6 @@ Add mode to show pending posts in all archives for reviewing.
 == Description ==
 
 Show pending posts in all archives for reviewing.
-
-
 
 
 == Changelog ==

@@ -1,4 +1,9 @@
 <?php
+/**
+ * WP_Query control.
+ *
+ * @package Review_Mode
+ */
 
 namespace Review_Mode;
 
@@ -17,7 +22,9 @@ class Query {
 	}
 
 	/**
-	 * @param \WP_Query $query
+	 * Add post status in all query.
+	 *
+	 * @param \WP_Query $query \WP_Query instance.
 	 */
 	public function pre_get_posts( \WP_Query $query ) {
 		if ( is_admin() ) {
