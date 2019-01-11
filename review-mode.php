@@ -1,6 +1,10 @@
 <?php
 /**
  * Plugin Name:     Review Mode
+ * Plugin URI:      https://github.com/torounit/review-mode
+ * Description:     Add mode to show pending posts in all archives for reviewing.
+ * Author:          Toro_Unit
+ * Author URI:      https://torounit.com
  * Text Domain:     review-mode
  * Domain Path:     /languages
  * Version:         0.1.0
