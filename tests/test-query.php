@@ -45,7 +45,7 @@ class Test_Query extends \WP_UnitTestCase {
 	 *
 	 * @var int
 	 */
-	private $public  = 1;
+	private $public = 1;
 
 	/**
 	 * Pending post count.
@@ -59,7 +59,7 @@ class Test_Query extends \WP_UnitTestCase {
 	 *
 	 * @var int
 	 */
-	private $draft   = 4;
+	private $draft = 4;
 
 	/**
 	 * Private post count.
@@ -164,7 +164,7 @@ class Test_Query extends \WP_UnitTestCase {
 		wp_set_current_user( $this->subscriber->ID );
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
 			)
 		);
@@ -172,36 +172,36 @@ class Test_Query extends \WP_UnitTestCase {
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'publish',
+				'post_status'    => 'publish',
 			)
 		);
 		$this->assertEquals( $this->public, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'pending',
+				'post_status'    => 'pending',
 			)
 		);
 		$this->assertEquals( $this->pending, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'draft',
+				'post_status'    => 'draft',
 			)
 		);
 		$this->assertEquals( $this->draft, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'private',
+				'post_status'    => 'private',
 			)
 		);
 		$this->assertEquals( $this->private, count( $query->posts ) );
@@ -222,44 +222,44 @@ class Test_Query extends \WP_UnitTestCase {
 		wp_set_current_user( $this->subscriber->ID );
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
 			)
 		);
-		$this->assertEquals( $this->public + $this->pending + $this->draft, count( $query->posts ) );
+		$this->assertEquals( $this->public + $this->pending, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'publish',
+				'post_status'    => 'publish',
 			)
 		);
-		$this->assertEquals( $this->public + $this->pending + $this->draft, count( $query->posts ) );
+		$this->assertEquals( $this->public + $this->pending, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'pending',
+				'post_status'    => 'pending',
 			)
 		);
 		$this->assertEquals( $this->pending, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'draft',
+				'post_status'    => 'draft',
 			)
 		);
 		$this->assertEquals( $this->draft, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'private',
+				'post_status'    => 'private',
 			)
 		);
 		$this->assertEquals( $this->private, count( $query->posts ) );
@@ -279,7 +279,7 @@ class Test_Query extends \WP_UnitTestCase {
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
 			)
 		);
@@ -288,36 +288,36 @@ class Test_Query extends \WP_UnitTestCase {
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'publish',
+				'post_status'    => 'publish',
 			)
 		);
 		$this->assertEquals( $this->public, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'pending',
+				'post_status'    => 'pending',
 			)
 		);
 		$this->assertEquals( $this->pending, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'draft',
+				'post_status'    => 'draft',
 			)
 		);
 		$this->assertEquals( $this->draft, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'private',
+				'post_status'    => 'private',
 			)
 		);
 		$this->assertEquals( $this->private, count( $query->posts ) );
@@ -339,44 +339,44 @@ class Test_Query extends \WP_UnitTestCase {
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
 			)
 		);
-		$this->assertEquals( $this->public + $this->pending + $this->draft + $this->private, count( $query->posts ) );
+		$this->assertEquals( $this->public + $this->pending + $this->private, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'publish',
+				'post_status'    => 'publish',
 			)
 		);
-		$this->assertEquals( $this->public + $this->pending + $this->draft, count( $query->posts ) );
+		$this->assertEquals( $this->public + $this->pending, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'pending',
+				'post_status'    => 'pending',
 			)
 		);
 		$this->assertEquals( $this->pending, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'draft',
+				'post_status'    => 'draft',
 			)
 		);
 		$this->assertEquals( $this->draft, count( $query->posts ) );
 
 		$query = new \WP_Query(
 			array(
-				'post_type' => $post_type,
+				'post_type'      => $post_type,
 				'posts_per_page' => - 1,
-				'post_status' => 'private',
+				'post_status'    => 'private',
 			)
 		);
 		$this->assertEquals( $this->private, count( $query->posts ) );
