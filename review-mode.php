@@ -7,7 +7,7 @@
  * Author URI:      https://torounit.com
  * Text Domain:     review-mode
  * Domain Path:     /languages
- * Version:         0.1.0
+ * Version:         nightly
  *
  * @package         Review_Mode
  */
