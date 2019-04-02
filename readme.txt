@@ -3,8 +3,8 @@ Contributors: Toro_Unit
 Donate link: https://paypal.me/torounit
 Tags: review, admin
 Requires at least: 4.8
-Tested up to:      5.0
-Stable tag:        nighlty
+Tested up to:      5.1
+Stable tag:        nightly
 Requires PHP:      5.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
